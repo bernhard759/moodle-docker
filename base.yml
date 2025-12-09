@@ -4,7 +4,7 @@ services:
     depends_on:
       - db
     volumes:
-      - "${MOODLE_DOCKER_WWWROOT}:/var/www/html"
+      #- "${MOODLE_DOCKER_WWWROOT}:/var/www/html"
       - "${ASSETDIR}/web/apache2_faildumps.conf:/etc/apache2/conf-enabled/moodle-faildump.conf"
     environment:
       MOODLE_DOCKER_RUNNING: 1

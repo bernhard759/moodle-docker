@@ -1,0 +1,15 @@
+services:
+  webserver:
+    volumes:
+      - moodledata:/var/www/moodledata
+      - moodlecode:/var/www/html
+      #- ./moodle/question/type:/var/www/html/question/type  
+
+  db:
+    volumes:
+      - moodledb:/var/lib/postgresql/data
+
+volumes:
+  moodledata:
+  moodledb:
+  moodlecode:

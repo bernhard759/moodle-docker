@@ -1,0 +1,4 @@
+services:
+  webserver:
+    volumes:
+      - ./moodle/question/type:/var/www/html/question/type
