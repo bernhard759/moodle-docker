@@ -1,0 +1,7 @@
+bin/moodle-docker-compose exec webserver php admin/cli/upgrade.php --non-interactive
+bin/moodle-docker-compose exec webserver php admin/cli/purge_caches.php
+
+Naming:
+* Question type class:  `qtype_myqtype`         
+* Form:                 `edit_myqtype_form.php` 
+* Language file:        `qtype_myqtype.php`     
