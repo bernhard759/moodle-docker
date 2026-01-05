@@ -1,18 +1,21 @@
 $env:MOODLE_DOCKER_WWWROOT="./moodle"
 $env:MOODLE_DOCKER_DB="pgsql"
+
+git clone -b MOODLE_405_STABLE https://github.com/bernhard759/moodle.git $MOODLE_DOCKER_WWWROOT
+
 cp config.docker-template.php ./moodle/config.php 
 bin/moodle-docker-compose config
-bin/moodle-docker-compose exec webserver php admin/cli/install_database.php `
+
+docker run --rm -v moodle-docker_moodlecode:/target -v "$(pwd)/moodle:/source" alpine cp -a /source/. /target
+
+bin/moodle-docker-compose up -d
+
+bin/moodle-docker-compose exec webserver php /var/www/html/admin/cli/install_database.php `
     --agree-license `
     --fullname="Docker moodle" `
     --shortname="docker_moodle" `
     --summary="Docker moodle site" `
     --adminpass="test" `
     --adminemail="admin@example.com"
-bin/moodle-docker-compose up -d
 
-docker cp ./moodle/. moodle-docker-webserver-1:/var/www/html
-docker exec moodle-docker-webserver-1 rm -rf /var/www/html/question/type
-bin/moodle-docker-compose stop webserver
-bin/moodle-docker-compose rm -f webserver
-bin/moodle-docker-compose -f base.yml -f service.mail.yml -f local.dev.yml up -d webserver
+docker volume ls
