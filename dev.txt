@@ -5,3 +5,6 @@ Naming:
 * Question type class:  `qtype_myqtype`         
 * Form:                 `edit_myqtype_form.php` 
 * Language file:        `qtype_myqtype.php`     
+
+
+Moodle injects a global object called config into every Mustache template.
