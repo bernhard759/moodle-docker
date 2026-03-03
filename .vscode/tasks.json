@@ -1,0 +1,140 @@
+{
+  "version": "2.0.0",
+  "inputs": [
+    {
+      "id": "phpunitFilter",
+      "type": "promptString",
+      "description": "PHPUnit --filter (test name / regex, empty = all tests)",
+      "default": ""
+    },
+    {
+      "id": "behatTags",
+      "type": "promptString",
+      "description": "Behat --tags (filter by tags, empty = all tests)",
+      "default": "@local_coderunnerai"
+    }
+  ],
+  "tasks": [
+    {
+      "label": "PHPUnit Init (Docker)",
+      "type": "shell",
+      "command": "bin/moodle-docker-compose.cmd",
+      "args": [
+        "exec",
+        "-T",
+        "webserver",
+        "php",
+        "admin/tool/phpunit/cli/init.php"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MOODLE_DOCKER_WWWROOT": "./moodle",
+          "MOODLE_DOCKER_DB": "pgsql"
+        }
+      },
+      "problemMatcher": [],
+      "group": "none",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true
+      }
+    },
+    {
+      "label": "PHPUnit (Docker)",
+      "type": "shell",
+      "command": "bin/moodle-docker-compose.cmd",
+      "args": [
+        "exec",
+        "-T",
+        "webserver",
+        "vendor/bin/phpunit",
+        "--testdox",
+        "--colors=always",
+        "--filter",
+        "${input:phpunitFilter}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MOODLE_DOCKER_WWWROOT": "./moodle",
+          "MOODLE_DOCKER_DB": "pgsql"
+        }
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true
+      }
+    },
+    {
+      "label": "Behat Init (Docker)",
+      "type": "shell",
+      "command": "bin/moodle-docker-compose.cmd",
+      "args": [
+        "exec",
+        "-T",
+        "webserver",
+        "php",
+        "admin/tool/behat/cli/init.php"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MOODLE_DOCKER_WWWROOT": "./moodle",
+          "MOODLE_DOCKER_DB": "pgsql",
+          "MOODLE_DOCKER_BROWSER": "chrome"
+        }
+      },
+      "problemMatcher": [],
+      "group": "none",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true
+      }
+    },
+    {
+      "label": "Behat Run (Docker)",
+      "type": "shell",
+      "command": "bin/moodle-docker-compose.cmd",
+      "args": [
+        "exec",
+        "-T",
+        "webserver",
+        "php",
+        "admin/tool/behat/cli/run.php",
+        "--tags=${input:behatTags}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MOODLE_DOCKER_WWWROOT": "./moodle",
+          "MOODLE_DOCKER_DB": "pgsql",
+          "MOODLE_DOCKER_BROWSER": "chrome"
+        }
+      },
+      "problemMatcher": [],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true
+      }
+    }
+  ]
+}
