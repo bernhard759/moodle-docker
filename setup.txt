@@ -1,5 +1,6 @@
 $env:MOODLE_DOCKER_WWWROOT="./moodle"
 $env:MOODLE_DOCKER_DB="pgsql"
+$env:MOODLE_DOCKER_BROWSER="chrome"
 
 git clone -b MOODLE_405_STABLE https://github.com/bernhard759/moodle.git $MOODLE_DOCKER_WWWROOT
 
@@ -19,3 +20,9 @@ bin/moodle-docker-compose exec webserver php /var/www/html/admin/cli/install_dat
     --adminemail="admin@example.com"
 
 docker volume ls
+
+docker network create \
+  --subnet 100.64.0.0/24 \
+  coderunner-net
+
+npx grunt amd --files=local/coderunnerai/amd/src/feedback.js --force

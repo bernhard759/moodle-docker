@@ -1,3 +1,8 @@
 git clone https://github.com/moodlehq/moodle-local_codechecker.git local/codechecker
 
 docker exec moodle-docker-webserver-1 php /var/www/html/admin/cli/purge_caches.php
+
+docker exec -it moodle-docker-webserver-1 curl http://jobe
+
+docker network create coderunner-net
+
