@@ -1,11 +1,15 @@
 services:
   webserver:
+    networks:
+      - coderunner-net
+      - moodle-net
     volumes:
       - moodledata:/var/www/moodledata # Runtime data
       - moodlecode:/var/www/html # Application
       # Plugins Bind-mounts
       - ./moodle/question/type:/var/www/html/question/type
       - ./moodle/local:/var/www/html/local
+      - ./moodle/blocks:/var/www/html/blocks
       # XDebug Configuration (read-only)
       - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/99-xdebug.ini:ro
     environment:
@@ -15,6 +19,8 @@ services:
       XDEBUG_CLIENT_HOST: host.docker.internal
       XDEBUG_CLIENT_PORT: 9003
   db:
+    networks:
+      - moodle-net
     ports:
       - "5432:5432"
     volumes:
@@ -24,3 +30,9 @@ volumes:
   moodledata:
   moodledb:
   moodlecode:
+
+networks:
+  moodle-net:
+    driver: bridge
+  coderunner-net:
+    external: true
