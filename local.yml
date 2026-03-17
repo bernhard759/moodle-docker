@@ -2,6 +2,7 @@ services:
   webserver:
     networks:
       - coderunner-net
+      - llm-net
       - moodle-net
     volumes:
       - moodledata:/var/www/moodledata # Runtime data
@@ -35,4 +36,6 @@ networks:
   moodle-net:
     driver: bridge
   coderunner-net:
+    external: true
+  llm-net:
     external: true

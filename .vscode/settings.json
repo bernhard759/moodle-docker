@@ -4,5 +4,5 @@
   "terminal.integrated.env.windows": {
     "MOODLE_DOCKER_WWWROOT": "${workspaceFolder}\\moodle",
     "MOODLE_DOCKER_DB": "pgsql"
-  }
+  },
 }
