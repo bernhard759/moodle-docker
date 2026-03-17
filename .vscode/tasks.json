@@ -116,7 +116,9 @@
         "webserver",
         "php",
         "admin/tool/behat/cli/run.php",
-        "--tags=${input:behatTags}"
+        "--tags=${input:behatTags}",
+        "--format=progress",
+        "--colors"
       ],
       "options": {
         "cwd": "${workspaceFolder}",
