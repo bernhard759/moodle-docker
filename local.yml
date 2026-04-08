@@ -9,6 +9,7 @@ services:
       - moodlecode:/var/www/html # Application
       # Plugins Bind-mounts
       - ./moodle/question/type:/var/www/html/question/type
+      - ./moodle/question/behaviour:/var/www/html/question/behaviour
       - ./moodle/local:/var/www/html/local
       - ./moodle/blocks:/var/www/html/blocks
       # XDebug Configuration (read-only)

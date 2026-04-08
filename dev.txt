@@ -1,13 +1,9 @@
+git clone https://github.com/moodlehq/moodle-local_codechecker.git local/codechecker
+
 bin/moodle-docker-compose exec webserver php admin/cli/upgrade.php --non-interactive
 bin/moodle-docker-compose exec webserver php admin/cli/purge_caches.php
 bin/moodle-docker-compose exec webserver php admin/tool/phpunit/cli/init.php
 bin/moodle-docker-compose exec webserver vendor/bin/phpunit --filter <name>
+bin/moodle-docker-compose exec webserver curl http://jobe
 
-
-Naming:
-* Question type class:  `qtype_myqtype`         
-* Form:                 `edit_myqtype_form.php` 
-* Language file:        `qtype_myqtype.php`     
-
-
-Moodle injects a global object called config into every Mustache template.
+docker network create coderunner-net

@@ -1,6 +1,6 @@
 # Setup Docker-Moodle für Plugin-Entwicklung
 
-Diese Anleitung beschreibt, wie eine lokale Entwicklungsumgebung für Moodle-Plugins mit Docker eingerichtet wird. DIe Anleitung basiert auf dem [Tutorial von Jonathan Downey](https://lmstutorials.com/tutorials/moodle_docker/moodle_docker.php) und ist speziell für die Plugin-Entwicklung angepasst.
+Diese Anleitung beschreibt, wie eine lokale Entwicklungsumgebung für Moodle-Plugins mit Docker eingerichtet wird. Die Anleitung basiert auf dem [Tutorial von Jonathan Downey](https://lmstutorials.com/tutorials/moodle_docker/moodle_docker.php) und ist speziell für die Plugin-Entwicklung angepasst.
 
 Prinzipiell wird auch hier mittels Docker Compose Moodle in Containern ausgeführt. In der Standardkonfiguration wird ein Bind-Mount für den Moodle-Code verwendet, was bei Windows-Rechnern zu Performance-Problemen führen kann. Daher wird in dieser Anleitung stattdessen ein Docker-Volume für den Moodle-Code verwendet, das einmalig mit dem Moodle-Code befüllt wird. Zusätzlich wird ein dedizierter Bind-Mount für den Plugin-Ordner eingerichtet, um die Entwicklung zu erleichtern.
 

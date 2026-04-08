@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "bmewburn.vscode-intelephense-client",
-        "xdebug.php-debug"
+        "xdebug.php-debug",
+        //"kokororin.vscode-phpfmt"
     ]
 }

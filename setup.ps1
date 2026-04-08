@@ -8,7 +8,6 @@ $MOODLE_DIR    = "./moodle"
 $PREFIX = "moodle-docker"
 $VOLUME_NAME   = $PREFIX + "_" + "moodlecode"
 
-
 # Env vars
 $env:MOODLE_DOCKER_WWWROOT = $MOODLE_DIR
 $env:MOODLE_DOCKER_DB     = "pgsql"
@@ -30,13 +29,18 @@ if (-Not (Test-Path "$MOODLE_DIR/config.php")) {
     Write-Host "config.php already exists, skipping" -ForegroundColor Green
 }
 
+# Run the Docker Compose config command to generate the configuration files
+#Write-Host "Generating Docker configuration files..." -ForegroundColor Cyan
+#bin/moodle-docker-compose config
+
 # Volume Population
 $volumeExists = docker volume ls --format "{{.Name}}" | Where-Object { $_ -eq $VOLUME_NAME }
 if (-Not $volumeExists) {
     Write-Host "Creating and populating Docker volume: $VOLUME_NAME" -ForegroundColor Yellow
+    # Create temp container, mount named docker volume to target and local workspace folder to source and copyfiles from source to target
     docker run --rm `
-        -v ${VOLUME_NAME}:/target `
-        -v "${PWD}/moodle:/source" `
+        -v "${VOLUME_NAME}:/target" ` # volume mount
+        -v "${PWD}/moodle:/source" ` # bind mount
         alpine sh -c "cp -a /source/. /target"
 } else {
     Write-Host "Docker volume already exists, skipping copy" -ForegroundColor Green
@@ -48,7 +52,7 @@ bin/moodle-docker-compose up -d
 Start-Sleep -Seconds 10
 
 
-# Install Moodle (CLI)
+# Install Moodle (via CLI)
 Write-Host "Running Moodle CLI installer..." -ForegroundColor Yellow
 bin/moodle-docker-compose exec webserver php /var/www/html/admin/cli/install_database.php `
     --agree-license `
