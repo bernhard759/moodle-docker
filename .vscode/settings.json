@@ -1,6 +1,6 @@
 {
   "intelephense.diagnostics.undefinedTypes": false,
-  //"intelephense.diagnostics.undefinedMethods": false,
+  "intelephense.diagnostics.undefinedMethods": false,
   "terminal.integrated.env.windows": {
     "MOODLE_DOCKER_WWWROOT": "${workspaceFolder}\\moodle",
     "MOODLE_DOCKER_DB": "pgsql"
