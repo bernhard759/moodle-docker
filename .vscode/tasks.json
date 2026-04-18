@@ -93,7 +93,7 @@
         "env": {
           "MOODLE_DOCKER_WWWROOT": "./moodle",
           "MOODLE_DOCKER_DB": "pgsql",
-          "MOODLE_DOCKER_BROWSER": "chrome"
+          "MOODLE_DOCKER_BROWSER": "firefox"
         }
       },
       "problemMatcher": [],
@@ -125,7 +125,7 @@
         "env": {
           "MOODLE_DOCKER_WWWROOT": "./moodle",
           "MOODLE_DOCKER_DB": "pgsql",
-          "MOODLE_DOCKER_BROWSER": "chrome"
+          "MOODLE_DOCKER_BROWSER": "firefox"
         }
       },
       "problemMatcher": [],
