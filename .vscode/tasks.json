@@ -137,6 +137,42 @@
         "panel": "shared",
         "showReuseMessage": true
       }
+    },
+    {
+      "label": "PHPUnit Coverage (Docker)",
+      "type": "shell",
+      "command": "bin/moodle-docker-compose.cmd",
+      "args": [
+        "exec",
+        "-T",
+        "-e",
+        "XDEBUG_MODE=coverage",
+        "webserver",
+        "vendor/bin/phpunit",
+        "-c",
+        "local/coderunnerai/phpunit-coverage.xml",
+        "--testdox",
+        "--colors=always",
+        "--filter",
+        "${input:phpunitFilter}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MOODLE_DOCKER_WWWROOT": "./moodle",
+          "MOODLE_DOCKER_DB": "pgsql",
+          "XDEBUG_MODE": "coverage"
+        }
+      },
+      "problemMatcher": [],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true
+      }
     }
   ]
 }
