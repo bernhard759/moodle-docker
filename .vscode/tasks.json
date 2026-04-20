@@ -107,37 +107,6 @@
       }
     },
     {
-      "label": "Set CodeRunner Jobe Host (Docker)",
-      "type": "shell",
-      "command": "bin/moodle-docker-compose.cmd",
-      "args": [
-        "exec",
-        "-T",
-        "webserver",
-        "php",
-        "admin/cli/cfg.php",
-        "--name=qtype_coderunner/jobe_host",
-        "--set=jobe"
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}",
-        "env": {
-          "MOODLE_DOCKER_WWWROOT": "./moodle",
-          "MOODLE_DOCKER_DB": "pgsql",
-          "MOODLE_DOCKER_BROWSER": "firefox"
-        }
-      },
-      "problemMatcher": [],
-      "group": "none",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true
-      }
-    },
-    {
       "label": "Behat Run (Docker)",
       "type": "shell",
       "command": "bin/moodle-docker-compose.cmd",
@@ -159,10 +128,6 @@
           "MOODLE_DOCKER_BROWSER": "firefox"
         }
       },
-      "dependsOn": [
-        "Set CodeRunner Jobe Host (Docker)"
-      ],
-      "dependsOrder": "sequence",
       "problemMatcher": [],
       "group": "test",
       "presentation": {
